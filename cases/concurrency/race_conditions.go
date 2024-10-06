@@ -1,4 +1,4 @@
-package cases
+package concurrency
 
 import (
 	"sync"

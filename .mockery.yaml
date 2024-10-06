@@ -1,0 +1,12 @@
+quiet: False
+disable-version-string: True
+with-expecter: True
+mockname: "{{.InterfaceName}}"
+inpackage: True
+packages:
+  github.com/tamaroth/advanced-testing-techniques-in-go/cases/mocks:
+    config:
+      dir: "cases/mocks/mocks/"
+      filename: "mock_{{.InterfaceName}}.go"
+      outpkg: "mocks"
+      all: True
