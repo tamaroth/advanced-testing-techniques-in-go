@@ -1,7 +1,6 @@
 package concurrency
 
 import (
-	"sync"
 	"time"
 
 	"github.com/sasha-s/go-deadlock"
@@ -9,22 +8,10 @@ import (
 
 type BankAccount struct {
 	balance int
-	mu      sync.Mutex
-	mtx     deadlock.Mutex
+	mu      deadlock.Mutex
 }
 
 func (acc *BankAccount) Transfer(to *BankAccount, amount int) {
-	acc.mtx.Lock()
-	defer acc.mtx.Unlock()
-	time.Sleep(time.Millisecond) // Force deadlock.
-	to.mtx.Lock()
-	defer to.mtx.Unlock()
-	acc.balance -= amount
-	to.balance += amount
-}
-
-// Transfer moves money from one account to another
-func (acc *BankAccount) TransferWithDeadlock(to *BankAccount, amount int) {
 	acc.mu.Lock()
 	defer acc.mu.Unlock()
 	time.Sleep(time.Millisecond) // Force deadlock.
@@ -33,6 +20,8 @@ func (acc *BankAccount) TransferWithDeadlock(to *BankAccount, amount int) {
 	acc.balance -= amount
 	to.balance += amount
 }
+
+// mtx     deadlock.Mutex
 
 // Deposit adds money to the account
 func (acc *BankAccount) Deposit(amount int) {

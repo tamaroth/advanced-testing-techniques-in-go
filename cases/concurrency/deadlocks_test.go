@@ -18,12 +18,12 @@ func TestDeadlock(t *testing.T) {
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		account1.TransferWithDeadlock(account2, 50)
+		account1.Transfer(account2, 50)
 	}()
 
 	go func() {
 		defer wg.Done()
-		account2.TransferWithDeadlock(account1, 50)
+		account2.Transfer(account1, 50)
 	}()
 
 	// This test will likely deadlock and never complete

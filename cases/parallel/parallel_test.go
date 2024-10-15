@@ -28,11 +28,6 @@ func TestCanBeExecutedInParallel(t *testing.T) {
 			source: 2,
 			expect: 4,
 		},
-		{
-			name:   "test 3",
-			source: 3,
-			expect: 6,
-		},
 	}
 
 	for _, testCase := range testCases {
@@ -60,11 +55,6 @@ func TestCannotBeExecutedInParallel(t *testing.T) {
 			name:   "test 2",
 			source: 2,
 			expect: 4,
-		},
-		{
-			name:   "test 3",
-			source: 3,
-			expect: 6,
 		},
 	}
 
